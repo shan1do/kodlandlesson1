@@ -1,15 +1,10 @@
-my_dict = {"ЛОЛ": "очень смешно",
-          "КРИНЖ": "что-то странное, стыдное",
-          "РОФЛ": "шутка",
-          "ЩИЩ": "одобрение или восторг",
-          "КРИПОВЫЙ": "страшный, пугающий"}
+import random
+simbol = "+-/*!&$#?=@abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+score = int(input("Количество символов в пароле "))
+password = ""
 
-word = input("Непонятное слово").upper()
-
-
-if word in my_dict.keys():
-    print(my_dict[word])
-
-else:
-    print("Такого слова ещё нету")
+for i in range(score):
+    password += random.choice(simbol)
     
+print(password)
+
