@@ -50,11 +50,11 @@ def gen_pas(message):
     bot.reply_to(message, generate_password(8))
     
 @bot.message_handler(commands = ['smile'])
-def gen_pas(message):
+def smile(message):
     bot.reply_to(message, smile())  
     
 @bot.message_handler(commands = ['monet'])
-def gen_pas(message):
+def fiftyfifty(message):
     bot.reply_to(message, fiftyfifty())
     
 # Обработчик команды '/heh'
@@ -66,8 +66,46 @@ def send_heh(message):
 @bot.message_handler(commands=['go'])
 def on_start(message):
     bot.reply_to(message, text_messages['wrong_chat'])
+
+
+@bot.message_handler(commands=['calc'])
+def handle_text(message): 
+    numvan = bot.send_message(message.chat.id, 'Введите первое число: ') 
+    bot.register_next_step_handler(numvan ,num1_fun)
+
+def num1_fun(message):
+   global num1;
+   num1 = message.text
+   numtwo = bot.send_message(message.chat.id, 'Введите второе число: ')
+   bot.register_next_step_handler(numtwo ,num2_fun)
+   
+def num2_fun(message):
+    global num2;
+    num2 = message.text      
+    operu = bot.send_message(message.chat.id, 'Введите действие: ')
+    bot.register_next_step_handler(operu ,operi)
     
+def operi(message):
+    global oper;
+    oper = message.text
+    if oper == "+":
+        resylit = int(num1)+int(num2)
+        bot.send_message(message.chat.id,resylit)
+    elif oper == "-":
+        resylit = int(num1)-int(num2)
+        bot.send_message(message.chat.id,resylit)
+    elif oper == "*":
+        resylit = int(num1)*int(num2)
+        bot.send_message(message.chat.id,resylit)
+    elif oper == "/": 
+        resylit = int(num1)/int(num2)
+        bot.send_message(message.chat.id,resylit)
+    elif oper == "**":
+        resylit = int(num1)**int(num2)
+        bot.send_message(message.chat.id,resylit)
     
+    else:
+        bot.send_message(message.chat.id,"ошибка ведите /calc")
     
     
     
